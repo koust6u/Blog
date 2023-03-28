@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>회원 가입</title>
+  <link href="../../css/myCss.css" rel="stylesheet">
+  <style>
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      text-align: left;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: pink;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    label {
+      text-align: left;
+      width: 100%;
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
-<body>
-$END$
+<body class="container">
+<header class="header">
+  <a class="heart-container" href="/">
+    <div class="heart"></div>
+  </a>
+  <nav class="menu">
+    <a href="/" class="menu-item">Home</a>
+    <a href="/about" class="menu-item">About</a>
+    <a href="#" class="menu-item">Log</a>
+    <a href="#" class="menu-item">Contact</a>
+  </nav>
+</header>
+<div class="container">
+  <form action="" th:action th:object="${member}" method="post">
+    <div>
+      <label for="username">이름</label>
+      <input type="text" id="username" th:field="*{username}" required>
+      <div class ="field-error" th:errors="*{username}"></div>
+
+      <label for="loginId">아이디</label>
+      <input type="text" id="loginId" th:field="*{loginId}" placeholder="아이디를 입력하세여" required>
+      <div class ="field-error" th:errors="*{loginId}"></div>
+
+      <label for="password">비밀번호</label>
+      <input type="password" name="password" id="password" th:field="*{password}" required>
+      <div class ="field-error" th:errors="*{password}"></div>
+
+      <label for="password-confirm">비밀번호 확인</label>
+      <input type="password" name="password-confirm" id="password-confirm" required>
+    </div>
+
+    <input type="submit" value="회원 가입">
+  </form>
+</div>
 </body>
 </html>

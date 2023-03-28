@@ -1,10 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>민종이의 개발일지</title>
+  <link href="../css/myCss.css" rel="stylesheet">
+  <style>
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 수직 정렬을 위해 부모 요소에 적용 */
+      align-items: center; /* 수직 정렬을 위해 부모 요소에 적용 */
+    }
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+    .pButton {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #FFC0CB;
+      color: #FFF;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .pButton:hover {
+      background-color: #FF69B4;
+    }
+  </style>
 </head>
 <body>
-$END$
+<div class="container">
+  <header class="header">
+    <a class="heart-container" href="/">
+      <div class="heart"></div>
+    </a>
+    <nav class="menu">
+      <a href="/" class="menu-item">Home</a>
+      <a href="/about" class="menu-item  ">About</a>
+      <a href="#" class="menu-item">Log</a>
+      <a href="#" class="menu-item">Contact</a>
+    </nav>
+  </header>
+  <form class="form-container" action="../loginHome.html" th:action th:object="${loginForm}" method="post">
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+    </div>
+    <label for="loginId">아이디</label>
+    <input type="text" name="loginId" id="loginId" th:field="*{loginId}" required>
+    <label for="password">비밀번호</label>
+    <input type="password" name="password" id="password" th:field="*{password}" required>
+    <div>
+      <a href="/members/add" class="pButton">회원가입</a>
+      <input type="submit" value="로그인" class="pButton">
+    </div>
+  </form>
+  <footer>
+    <p>&copy; 2023 민종이의 개발일지. All rights reserved.</p>
+    <ul>
+      <li><a href="#">Terms of Service</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="/">Administrator</a></li>
+    </ul>
+  </footer>
+</div>
 </body>
 </html>

@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>민종이의 개발일지</title>
+  <link href="../css/myCss.css" rel="stylesheet">
 </head>
 <body>
-$END$
+<div class="container">
+  <header class="header">
+    <a class="heart-container" href="/">
+      <div class="heart"></div>
+    </a>
+    <nav class="menu">
+      <a href="/" class="menu-item">Home</a>
+      <a href="/about" class="menu-item">About</a>
+      <a href="#" class="menu-item">Log</a>
+      <a href="#" class="menu-item">Contact</a>
+      <a href="/admin" class="menu-item">Admin</a>
+    </nav>
+  </header>
+  <div class="hero">
+    <h1 class="hero-title" th:text="|${member.username}님 반가워요|">반가워요 </h1>
+    <p class="hero-subtitle">개발하는 동안 배운 것들과 경험들을 기록합니다.</p>
+    <img class="hero-image" src="/images/DallE-aComputer.png" alt="Placeholder Image">
+  </div>
+  <footer>
+    <p>Copyright © 2023
+      <a href="#">민종이의 개발일지</a>. All rights reserved.</p>
+    <ul>
+      <li><a href="#">Terms of Service</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><form action="/logout" method="post">
+        <button type="submit">log-Out </button>
+      </form>
+        <</li>
+    </ul>
+  </footer>
+</div>
 </body>
 </html>

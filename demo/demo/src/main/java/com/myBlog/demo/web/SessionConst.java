@@ -1,4 +1,4 @@
-package com.myBlog.demo.web.login.web;
+package com.myBlog.demo.web;
 
 public class SessionConst {
     public static final String LOGIN_MEMBER = "loginMember";
