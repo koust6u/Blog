@@ -5,8 +5,8 @@ import java.util.Optional;
 
 public interface MemberRepository {
     Member save(Member member);
-    Member findByKey(Long key);
+    Optional<Member> findByKey(Long key);
 
+    void update(Long key,MemberUpdateDto updateParam);
     Optional<Member> findByLoginId(String loginId);
-    List<Member> findAll();
 }

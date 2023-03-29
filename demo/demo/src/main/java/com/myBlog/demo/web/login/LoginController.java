@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class LoginController {
     private final LoginService loginService;
-    private final SessionManager sessionManager;
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm loginForm){
         return "login/loginForm";

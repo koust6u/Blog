@@ -3,6 +3,7 @@ package com.myBlog.demo.domain.member.memory;
 import com.myBlog.demo.domain.member.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -11,7 +12,9 @@ import java.util.*;
 @Repository
 public class MemoryRepository {
     private static Map<Long, Member> store = new HashMap<>(); //static 사용
-    private static long sequence = 0L; //static 사용
+    private static long sequence = 0L;
+
+    //static 사용
     public Member save(Member member) {
         member.setKey(++sequence);
         log.info("save: member={}", member);
