@@ -3,7 +3,6 @@ package com.myBlog.demo.domain.member.jdbcrepository;
 import com.myBlog.demo.domain.member.Member;
 import com.myBlog.demo.domain.member.MemberRepository;
 import com.myBlog.demo.domain.member.MemberUpdateDto;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -15,9 +14,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -31,13 +28,13 @@ JdbcTemplateRepository implements MemberRepository {
         template =new NamedParameterJdbcTemplate(dataSource);
         jdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("member")
-                .usingGeneratedKeyColumns("key");
+                .usingGeneratedKeyColumns("id");
     }
     @Override
     public Member save(Member member) {
         SqlParameterSource param = new BeanPropertySqlParameterSource(member);
         Number key = jdbcInsert.executeAndReturnKey(param);
-        member.setKey(key.longValue());
+        member.setId(key.longValue());
         return member;
     }
 
@@ -46,7 +43,7 @@ JdbcTemplateRepository implements MemberRepository {
 
         String sql = "select id, name, login_id, password from member where key=:key";
         try{
-            Map<String, Object> param = Map.of("key", key);
+            Map<String, Object> param = Map.of("id", key);
             Member member = template.queryForObject(sql, param, getMemberRowMapper());
             return Optional.of(member);
         }catch (EmptyResultDataAccessException e){
@@ -58,8 +55,8 @@ JdbcTemplateRepository implements MemberRepository {
     public Optional<Member> findByLoginId(String loginId) {
         String sql = "select id, name, login_id, password from member where login_id=:loginId";
         try{
-            Map<String,Object> param = Map.of("login_id",  loginId);
-            Member member = template.queryForObject(sql, param, getMemberRowMapper());
+            Map<String, Object> param = Map.of("loginId", loginId);
+            Member member = template.queryForObject(sql,param, getMemberRowMapper());
             return Optional.of(member);
         }
         catch (EmptyResultDataAccessException e){
@@ -71,7 +68,7 @@ JdbcTemplateRepository implements MemberRepository {
     @Override
     public void update(Long key, MemberUpdateDto updateParam) {
         String sql = "update member " +
-                "set username=:name, login_id=:loginId, password=:password "+
+                "set name=:name, login_id=:loginId, password=:password "+
                 "where key=:key";
 
         SqlParameterSource param = new MapSqlParameterSource()

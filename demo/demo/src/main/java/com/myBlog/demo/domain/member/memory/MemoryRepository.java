@@ -3,7 +3,6 @@ package com.myBlog.demo.domain.member.memory;
 import com.myBlog.demo.domain.member.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -16,9 +15,9 @@ public class MemoryRepository {
 
     //static 사용
     public Member save(Member member) {
-        member.setKey(++sequence);
+        member.setId(++sequence);
         log.info("save: member={}", member);
-        store.put(member.getKey(), member);
+        store.put(member.getId(), member);
         return member;
     }
     public Member findByKey(Long id) {

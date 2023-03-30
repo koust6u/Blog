@@ -32,7 +32,7 @@ public class MemberController {
     @PostMapping("/add")
     public String save(@Validated(SaveCheck.class) @ModelAttribute Member member, BindingResult result){
         if(result.hasErrors()) return "members/addMemberForm";
-        log.info("username ={}", member.getUsername());
+        log.info("username ={}", member.getName());
 
 
         memberRepository.save(member);
