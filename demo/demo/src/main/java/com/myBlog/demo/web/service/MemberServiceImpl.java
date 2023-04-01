@@ -19,8 +19,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void update(Long key, MemberUpdateDto updateParam) {
-        memberRepository.update(key,updateParam);
+    public void update(Long id, MemberUpdateDto updateParam) {
+        memberRepository.update(id,updateParam);
     }
 
     @Override

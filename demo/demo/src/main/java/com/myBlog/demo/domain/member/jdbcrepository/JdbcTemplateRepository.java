@@ -41,9 +41,9 @@ JdbcTemplateRepository implements MemberRepository {
     @Override
     public Optional<Member> findByKey(Long key) {
 
-        String sql = "select id, name, login_id, password from member where key=:key";
+        String sql = "select id, name, login_id, password from member where id=:key";
         try{
-            Map<String, Object> param = Map.of("id", key);
+            Map<String, Object> param = Map.of("key", key);
             Member member = template.queryForObject(sql, param, getMemberRowMapper());
             return Optional.of(member);
         }catch (EmptyResultDataAccessException e){
@@ -66,19 +66,18 @@ JdbcTemplateRepository implements MemberRepository {
     }
 
     @Override
-    public void update(Long key, MemberUpdateDto updateParam) {
-        String sql = "update member " +
-                "set name=:name, login_id=:loginId, password=:password "+
-                "where key=:key";
+    public void update(Long id, MemberUpdateDto updateParam) {
+        String sql  =  "update member " +
+                "set name=:name, login_id=:loginId, password=:password " +
+                "where id=:id";
 
         SqlParameterSource param = new MapSqlParameterSource()
                 .addValue("name", updateParam.getName())
+                .addValue("password", updateParam.getPassword())
                 .addValue("loginId", updateParam.getLoginId())
-                .addValue("password", updateParam.getPassword());
+                .addValue("id", id);
 
-
-        template.update(sql, param);
-
+        template.update(sql,param);
     }
 
 

@@ -17,4 +17,8 @@ public class LoginService {
                         .orElse(null);
     }
 
+    public boolean duplicateId(String loginId){
+        Member member = memberRepository.findByLoginId(loginId).orElse(null);
+        return member == null;
+    }
 }

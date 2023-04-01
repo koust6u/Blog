@@ -7,6 +7,6 @@ public interface MemberRepository {
     Member save(Member member);
     Optional<Member> findByKey(Long key);
 
-    void update(Long key,MemberUpdateDto updateParam);
+    void update(Long id,MemberUpdateDto updateParam);
     Optional<Member> findByLoginId(String loginId);
 }

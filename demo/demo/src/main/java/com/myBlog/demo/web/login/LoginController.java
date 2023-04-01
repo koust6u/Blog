@@ -29,7 +29,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginForm loginForm, HttpServletResponse response, HttpServletRequest request,BindingResult result){
+    public String login(@Valid @ModelAttribute LoginForm loginForm, HttpServletRequest request,BindingResult result){
         if(result.hasErrors()) return "login/loginForm";
 
         Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
@@ -41,8 +41,6 @@ public class LoginController {
             return "login/loginForm";
         }
 
-
-        //sessionManager.createSession(loginForm,response);
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
         return "redirect:/";
@@ -50,7 +48,6 @@ public class LoginController {
 
     @PostMapping("/logout")
     public String logout(HttpServletRequest request){
-        log.info("Asdasdas");
         HttpSession session = request.getSession(false);
         if(session != null) {
             session.invalidate();

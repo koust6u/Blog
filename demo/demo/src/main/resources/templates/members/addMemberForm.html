@@ -50,6 +50,9 @@
 </header>
 <div class="container">
   <form action="" th:action th:object="${member}" method="post">
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+    </div>
     <div>
       <label for="username">이름</label>
       <input type="text" id="username" th:field="*{name}" required>

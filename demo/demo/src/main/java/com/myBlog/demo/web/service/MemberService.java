@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface MemberService {
     Member save(Member member);
-    void update(Long key, MemberUpdateDto updateParam);
+    void update(Long id, MemberUpdateDto updateParam);
 
     Optional<Member> findByKey(Long key);
     Optional<Member> findByLoginId(String loginId);
